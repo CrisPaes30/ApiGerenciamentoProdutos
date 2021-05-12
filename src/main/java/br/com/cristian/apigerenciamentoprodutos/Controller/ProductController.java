@@ -27,7 +27,7 @@ public class ProductController {
 
     @GetMapping
     public List<Product> findAll(@RequestParam(required = false) String product) {
-        return productService.listarProdutos(product);
+        return productService.listaDeProdutos(product);
     }
 
     @PostMapping

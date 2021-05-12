@@ -16,7 +16,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
 
-    public List<Product> listarProdutos(String produtcs){
+    public List<Product> listaDeProdutos(String  produtcs){
         if(produtcs != null){
             return productRepository.listarProdutos(produtcs);
         }
@@ -43,8 +43,5 @@ public class ProductService {
         productRepository.delete(id);
     }
 
-    public int test(int soma1, int soma2){
-        return soma1+soma2;
-    }
 
 }

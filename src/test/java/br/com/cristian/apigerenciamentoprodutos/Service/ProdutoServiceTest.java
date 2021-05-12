@@ -4,63 +4,113 @@ import br.com.cristian.apigerenciamentoprodutos.Model.Product;
 import br.com.cristian.apigerenciamentoprodutos.Respository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-//@SpringBootTest
+
+@SpringBootTest
 public class ProdutoServiceTest {
 
-//    @Autowired
-//    ProductRepository productRepository;
+    @MockBean
+    ProductRepository productRepository;
 
-    private final ProductRepository productRepository = mock(ProductRepository.class);
-    private final ProductService productService= mock(ProductService.class);
-    private Product product = mock(Product.class);
+    @Autowired
+    ProductService productService;
 
+    @MockBean
+    Product product;
 
 
     @Test
     public void testaListaProdutosTemConteudoOuEstaVazia(){
-        ProductService productService = new ProductService();
         List<Product> resultado = productRepository.listarProdutos();
         assertNotEquals(null, resultado);
-
-    }
-
-    public static List<Product> listaDeProdutos() {
-        List<Product> prod = new ArrayList<Product>();
-        prod.add(new Product(10, "Controle", 5, 15.00,
-                10));
-        prod.add(new Product(11, "Carrinho Hot Weels", 20, 5.0,
-                9));
-        return prod;
     }
 
     @Test
+    public void testaListagemDeProdutos(){
+        List<Product> lista = productService.listaDeProdutos(null);
+
+        Assertions.assertTrue(EhLista(lista), String.valueOf(true));
+
+        verify(productRepository, times(1)).listarProdutos();
+    }
+
+    public Boolean EhLista(List<Product> lista){
+        if (lista != null){
+            return true;
+        }
+        return false;
+    }
+
+
+    @Test
     public void testaAddItemALista(){
-        ProductService productService = new ProductService();
 
         Product product = new Product(null,"Test",5,10.00,1);
 
-        when(productRepository.count()).thenReturn(9);
-        doNothing().when(productRepository).adicionaItemNaLista(Matchers.any(Product.class));
+        when(productRepository.count()).thenReturn(10);
+        doNothing().when(productRepository).adicionaItemNaLista(null);
 
         int prod = productService.add(product);
 
-        Assertions.assertEquals(prod,9);
+        assertEquals(10,prod);
 
         verify(productRepository,times(1)).adicionaItemNaLista(product);
-
+        verify(productRepository, times(1)).count();
 
     }
+
+    @Test
+    public void testaAddItemAListaComId(){
+
+        Product product = new Product(10,"Test",5,10.00,1);
+
+        when(productRepository.count()).thenReturn(10);
+        doNothing().when(productRepository).adicionaItemNaLista(null);
+
+        int prod = productService.add(product);
+
+        assertEquals(prod,10);
+
+        verify(productRepository,times(1)).adicionaItemNaLista(product);
+        verify(productRepository, times(0)).count();
+
+    }
+
+    @Test
+    public void testaFindById(){
+        when(productRepository.findById(1)).thenReturn(product);
+
+        Product buscaId = productService.findById(1);
+
+        Assertions.assertEquals(product.getId(), buscaId.getId());
+
+        verify(productRepository, times(1)).findById(1);
+    }
+
+    @Test
+    public void testaUpdate(){
+
+        Product prod = new Product(1,"Test",5,10.00,1);
+
+        doNothing().when(productRepository).update(product);
+
+        productService.update(prod);
+
+        verify(productRepository, times(1)).update(prod);
+
+    }
+
+
+
 
 
 
