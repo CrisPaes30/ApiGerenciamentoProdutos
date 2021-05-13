@@ -13,8 +13,6 @@ import java.util.List;
 @Service
 public class VendaService {
 
-    @Autowired
-    private ProductRepository productRepository;
 
     @Autowired
     private ProductService productService;
@@ -23,6 +21,7 @@ public class VendaService {
     public VendaResponse calculo(List<OrderItens>ordensList){
 
         List<OrderItens> listaOrdens = new ArrayList<>();
+
         double valorTotal = 0;
 
         for(OrderItens item: ordensList){

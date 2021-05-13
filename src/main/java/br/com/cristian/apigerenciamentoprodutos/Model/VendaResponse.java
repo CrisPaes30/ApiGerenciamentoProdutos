@@ -13,9 +13,7 @@ public class VendaResponse {
         this.listaprodutos = listaprodutos;
     }
 
-    public VendaResponse(){
 
-    }
 
     public Double getValorTotal() {
         return valorTotal;

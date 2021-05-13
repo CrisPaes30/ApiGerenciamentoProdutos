@@ -43,7 +43,7 @@ public class ProdutoServiceTest {
         verify(productRepository, times(1)).listarProdutos();
     }
 
-    public Boolean EhLista(List<Product> lista){
+    private Boolean EhLista(List<Product> lista){
         if (lista != null){
             return true;
         }
@@ -109,12 +109,15 @@ public class ProdutoServiceTest {
 
     }
 
+    @Test
+    public void testaDelete(){
+        doNothing().when(productRepository).delete(2);
 
+        productService.delete(2);
 
+        verify(productRepository, times(1)).delete(2);
 
-
-
-
+    }
 
 
 
