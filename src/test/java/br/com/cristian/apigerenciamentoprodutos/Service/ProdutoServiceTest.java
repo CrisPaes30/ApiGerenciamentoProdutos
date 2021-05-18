@@ -71,14 +71,14 @@ public class ProdutoServiceTest {
     @Test
     public void testaAddItemAListaComId(){
 
-        Product product = new Product(10,"Test",5,10.00,1);
+        Product product = new Product(15,"Test",5,10.00,1);
 
-        when(productRepository.count()).thenReturn(10);
+        when(productRepository.count()).thenReturn(15);
         doNothing().when(productRepository).adicionaItemNaLista(null);
 
         int prod = productService.add(product);
 
-        assertEquals(prod,10);
+        assertEquals(prod,15);
 
         verify(productRepository,times(1)).adicionaItemNaLista(product);
         verify(productRepository, times(0)).count();

@@ -30,6 +30,12 @@ public class ProductController {
         return productService.listaDeProdutos(product);
     }
 
+    @GetMapping("/{id}")
+    public Product findById(@PathVariable("id") Integer id){
+        return productService.findById(id);
+
+    }
+
     @PostMapping
     public ResponseEntity<Integer> add(@RequestBody Product product) {
         productService.add(product);

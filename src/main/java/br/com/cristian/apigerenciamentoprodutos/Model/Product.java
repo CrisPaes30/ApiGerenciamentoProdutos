@@ -23,6 +23,10 @@ public class Product {
         this.valorProd = valorProd;
         this.codigoProd = codigoProd;
     }
+    public Product(){
+
+    }
+
 
     public Integer getId() {
         return id;

@@ -31,9 +31,4 @@ public class VendaController {
         return ResponseEntity.ok().body(vendaResponse);
     }
 
-    @GetMapping("/{nomeProd}")
-    public ResponseEntity<VendaResponse> getBuyFilter(@PathVariable("nomeProd") List<OrderItens> listOrder){
-        VendaResponse prod = vendaService.calculo(listOrder);
-        return ResponseEntity.ok().body(prod);
-    }
 }
