@@ -2,21 +2,17 @@ package br.com.cristian.apigerenciamentoprodutos.Service;
 
 
 import br.com.cristian.apigerenciamentoprodutos.Model.OrderItens;
-import br.com.cristian.apigerenciamentoprodutos.Model.Product;
 import br.com.cristian.apigerenciamentoprodutos.Model.VendaResponse;
-import br.com.cristian.apigerenciamentoprodutos.Respository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class VendaProductTest {
